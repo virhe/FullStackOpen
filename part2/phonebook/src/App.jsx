@@ -15,7 +15,8 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState(null)
+  const [status, setStatus] = useState(true)
 
   useEffect(() => {
     noteService
@@ -70,6 +71,15 @@ const App = () => {
         .then(() => {
           setPersons(persons.filter(person => person.id !== id))
         })
+        .catch(error => {
+          setStatus(false)
+          setMessage(`Information of ${target.name} has already been removed from server`)
+          setTimeout(() => {
+            setMessage(null)
+            setStatus(true)
+          }, 5000)
+        }
+        )
     }
   }
 
@@ -92,7 +102,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={message} />
+      <Notification message={message} status={status} />
 
       <Filter handleFilterChange={handleFilterChange} />
 
