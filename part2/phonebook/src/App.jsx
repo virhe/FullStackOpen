@@ -3,7 +3,10 @@ import axios from 'axios'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import Message from './components/Message'
 import personService from './services/persons'
+
+import './index.css'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -12,6 +15,9 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [searchName, setSearchName] = useState('')
   const [showAll, setShowAll] = useState('')
+
+  const [successMessage, setSuccessMessage] = useState(null)
+
 
   useEffect(() => {
     personService
@@ -40,6 +46,11 @@ const App = () => {
             .then(updatedPerson => {
               setPersons(persons.map(person => person.id !== updatedPerson.id ? person : updatedPerson))
             })
+
+          setSuccessMessage(`Updated ${person.name}'s number`)
+          setTimeout(() => {
+            setSuccessMessage(null)
+          }, 5000)
         }
 
       setNewName('')
@@ -89,6 +100,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Message message={successMessage}/>
       <Filter searchName={searchName} handleSearchChange={handleSearchChange}/>
 
       <h2>add a new</h2>
