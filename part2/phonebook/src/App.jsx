@@ -18,7 +18,6 @@ const App = () => {
 
   const [successMessage, setSuccessMessage] = useState(null)
 
-
   useEffect(() => {
     personService
       .getAll()
@@ -63,6 +62,11 @@ const App = () => {
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
         })
+
+      setSuccessMessage(`Added ${personObject.name}`)
+      setTimeout(() => {
+        setSuccessMessage(null)
+      }, 5000)
 
       setNewName('')
       setNewNumber('')

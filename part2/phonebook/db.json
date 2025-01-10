@@ -1,19 +1,9 @@
 {
   "persons": [
     {
-      "id": "5cd3",
-      "name": "afdsfsdf",
-      "number": "23423423"
-    },
-    {
-      "name": "test",
-      "number": "123",
-      "id": "6a53"
-    },
-    {
-      "id": "5fe7",
-      "name": "sadsadas",
-      "number": "23113"
+      "name": "asdasd",
+      "number": "321",
+      "id": "5142"
     }
   ]
 }
