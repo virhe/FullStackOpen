@@ -17,6 +17,7 @@ const App = () => {
   const [showAll, setShowAll] = useState('')
 
   const [successMessage, setSuccessMessage] = useState(null)
+  const [failureMEssage, setFailureMessage] = useState(null)
 
   useEffect(() => {
     personService
@@ -82,6 +83,9 @@ const App = () => {
         .then(() => {
           setPersons(persons.filter(person => person.id !== id))
         })
+        .catch(error => {
+          console.log(`Information of ${personObject.name} has already been removed from server`)
+        })
     }
   }
 
@@ -104,7 +108,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Message message={successMessage}/>
+      <Message message={successMessage} type="success"/>
+      <Message message={failureMessage}/>
       <Filter searchName={searchName} handleSearchChange={handleSearchChange}/>
 
       <h2>add a new</h2>
